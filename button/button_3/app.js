@@ -1,8 +1,9 @@
 import { images } from "./data.js";
+
 console.log(images);
 let index = 0;
 document.querySelector(".btn-next").addEventListener("click", function (e) {
-  if (index === images.length) return;
+  if (index === images.length - 1) return;
   index = index + 1;
   const currentSrc = document
     .querySelector(".image-content .image")
