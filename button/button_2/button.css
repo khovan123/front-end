@@ -1,0 +1,91 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6.4rem;
+  height: 30rem;
+  background-color: #222;
+}
+.button {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 1.2rem 2.4rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: green;
+  cursor: pointer;
+  position: relative;
+  background-color: inherit;
+  transition: color 0.5s linear 0.5s;
+}
+.button:hover {
+  color: #fff;
+}
+.button::before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  width: 0;
+  background-color: rgba(255, 0, 0, 0.482);
+  left: 0;
+  top: 0;
+  transition: 0.3s width ease-in 0.5s;
+}
+.button:hover::before,
+.button:active::before {
+  width: 100%;
+}
+.button span::before {
+  content: "";
+  background-color: red;
+  position: absolute;
+  display: block;
+  transition: width 0.1s linear, height 0.1s linear;
+}
+.button span:first-child::before {
+  width: 0;
+  height: 4px;
+  top: 0;
+  left: 0;
+  transition-delay: 0.1s;
+}
+
+.button span:nth-child(2)::before {
+  height: 0;
+  width: 4px;
+  top: 0;
+  right: 0;
+  transition-delay: 0.2s;
+}
+.button span:nth-child(3)::before {
+  width: 0;
+  height: 4px;
+  bottom: 0;
+  right: 0;
+  transition-delay: 0.3s;
+}
+.button span:last-child::before {
+  width: 4px;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  transition-delay: 0.4s;
+}
+.button:hover span:nth-child(odd)::before,
+.button:active span:nth-child(odd)::before {
+  width: 100%;
+}
+.button:hover span:nth-child(even)::before,
+.button:active span:nth-child(even)::before {
+  height: 100%;
+}
