@@ -1,0 +1,90 @@
+.header {
+  background-color: #333;
+}
+.container {
+  max-width: 117rem;
+  height: auto;
+  margin: 0 auto;
+}
+.main-nav {
+  display: flex;
+  padding: 0 4.8rem;
+  font-size: 1.8rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo-icon {
+  text-align: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid red;
+  display: inline-block;
+}
+.main-menu {
+  display: flex;
+  gap: 3.2rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.main-menu li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 1.8rem 2rem;
+}
+.main-menu .sub-menu {
+  position: absolute;
+  /* left: 0; */
+}
+.main-menu .sub-menu li a {
+  width: 100px;
+  display: block;
+  background-color: #333;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #6e6d6d;
+}
+.main-menu .sub-menu li:last-child a11 {
+  border: none;
+}
+.main-menu > li {
+  position: relative;
+}
+.main-menu > li > a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 0;
+  background-color: red;
+  transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.main-menu > li:hover > a::before {
+  width: 100%;
+}
+
+.main-menu ul.sub-menu {
+  display: none;
+}
+.main-menu > li:hover ul.sub-menu {
+  background-color: aqua;
+  display: block;
+}
+ul.sub-menu > li:first-child {
+  position: relative;
+}
+ul.sub-menu li ul.tertiary-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(100%);
+  display: none;
+}
+.main-menu > li:hover ul.sub-menu > li:hover > ul.tertiary-menu {
+  display: block;
+}
