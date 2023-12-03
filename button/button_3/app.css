@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6.4rem;
+}
+.box-images {
+  margin: 0 auto;
+  width: 100rem;
+}
+.image {
+  display: block;
+  max-height: 50rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+button {
+  display: block;
+  margin: 1.2rem 0;
+}
