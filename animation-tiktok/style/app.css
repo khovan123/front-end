@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+}
+.loader {
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.6rem;
+}
+.loader div:first-child::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 4.8rem;
+  height: 4.8rem;
+  background-color: #ff1479;
+  box-shadow: 0 0 1rem #ff1479;
+  border-radius: 50%;
+  animation: spinner 1s infinite linear;
+  animation-delay: 0.5s;
+  /* display: none; */
+}
+.loader div:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 4.8rem;
+  height: 4.8rem;
+  background-color: #39fffe;
+  box-shadow: 0 0 1rem #39fffe;
+  border-radius: 50%;
+  animation: spinner 1s infinite linear;
+  /* display: none; */
+}
+.loader div:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 4.8rem;
+  height: 4.8rem;
+  background-color: #ff1479;
+  box-shadow: 0 0 1rem #ff1479;
+  border-radius: 50%;
+  animation: spinner-sub 1s infinite linear;
+  animation-delay: 0.5s;
+  /* display: none; */
+}
+
+@keyframes spinner {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1) translateX(9rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes spinner-sub {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  24.99% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  49.99% {
+    opacity: 1;
+    transform: translateX(9rem);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(9rem);
+  }
+  99% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
