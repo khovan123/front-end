@@ -3,16 +3,26 @@ import GameBoard from "./GameBoard";
 import Player from "./Player";
 import "./index.css";
 import Log from "./Log";
+
+function DriveCurrentACtive(gameTurns) {
+  let currentPlayer = "X";
+
+  if (gameTurns.length > 0 && "X" === gameTurns[0].Player) {
+    currentPlayer = "O";
+  }
+  return currentPlayer;
+}
+
 function App() {
-  const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
+
+  const activePlayer = DriveCurrentACtive(gameTurns);
+
   function handleSelectSquare(rowIndex, colIndex) {
-    setActivePlayer((currentActivePlayer) =>
-      currentActivePlayer === "X" ? "O" : "X"
-    );
     setGameTurns((prevTurns) => {
+      const currentPlayer = DriveCurrentACtive(prevTurns);
       const updatedTurns = [
-        { Square: { row: rowIndex, col: colIndex }, Player: activePlayer },
+        { Square: { row: rowIndex, col: colIndex }, Player: currentPlayer },
         ...prevTurns,
       ];
       return updatedTurns;
