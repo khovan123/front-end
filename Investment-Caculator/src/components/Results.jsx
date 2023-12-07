@@ -25,7 +25,7 @@ export default function Results({ input }) {
               <td>{formatter.format(yearData.interest)}</td>
               <td>{formatter.format(totalInterest)}</td>
               <td>{formatter.format(totalAmountInvested)}</td>
-            </tr>aa
+            </tr>
           );
         })}
       </tbody>
