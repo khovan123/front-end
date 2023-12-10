@@ -53,10 +53,34 @@ function App() {
       };
     });
   }
+  function handleExitSelected() {
+    setProjectsState((preProjectsState) => {
+      return {
+        ...preProjectsState,
+        selectedProjectId: undefined,
+      };
+    });
+  }
+  function handleDeleteProject() {
+    setProjectsState((preProjectsState) => {
+      return {
+        selectedProjectId: undefined,
+        projects: preProjectsState.projects.filter(
+          (project) => project.id !== selectedProject.id
+        ),
+      };
+    });
+  }
   const selectedProject = projectsState.projects.find(
     (project) => project.id === projectsState.selectedProjectId
   );
-  let content = <SelectedProject project={selectedProject} />;
+  let content = (
+    <SelectedProject
+      project={selectedProject}
+      onDelete={handleDeleteProject}
+      onExit={handleExitSelected}
+    />
+  );
   if (projectsState.selectedProjectId === null) {
     content = (
       <AddProjects
@@ -65,7 +89,16 @@ function App() {
       />
     );
   } else if (projectsState.selectedProjectId === undefined) {
-    content = <Noprojects onStartAddProjects={handleStartAddProjects} />;
+    content = (
+      <Noprojects
+        onStartAddProjects={handleStartAddProjects}
+        projectState={
+          projectsState.projects.length > 0
+            ? "Choose your project."
+            : "You do not have any project before."
+        }
+      />
+    );
   }
   return (
     <>

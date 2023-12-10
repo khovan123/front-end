@@ -1,4 +1,4 @@
-export default function SelectedProject({ project }) {
+export default function SelectedProject({ project, onDelete, onExit }) {
   const formattedDate = new Date(project.date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -9,10 +9,20 @@ export default function SelectedProject({ project }) {
       <div className="selectedProject">
         <header>
           <h2>Title: {project.title}</h2>
-          <button className="btn-delete">Delete</button>
+          <div className="selectedProject-btn">
+            <button onClick={onDelete} className="btn-delete">
+              <i className="fa-solid fa-trash"></i>
+            </button>
+            <button onClick={onExit} className="btn-exit">
+              Exit
+            </button>
+          </div>
         </header>
-        <p className="selectedProject-date">{formattedDate}</p>
-        <p className="selectedProject-description">{project.description}</p>
+        <div className="project-content">
+          <p className="selectedProject-date">{formattedDate}</p>
+          <p className="selectedProject-description">{project.description}</p>
+        </div>
+        <div className="project-task">TASK</div>
       </div>
     </section>
   );
