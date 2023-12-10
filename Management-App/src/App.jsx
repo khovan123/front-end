@@ -9,31 +9,37 @@ function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
-  function handleSelectProjects(id) {
+  function handleAddTask(text) {
     setProjectsState((prevState) => {
-      changeButton.current = false;
+      const taskId = Math.random();
+      const newTask = {
+        text: text,
+        projectID: prevState.selectedProjectId,
+        id: taskId,
+      };
       return {
         ...prevState,
-        selectedProjectId: id,
+        tasks: [newTask, ...prevState.tasks],
       };
     });
   }
+  function handleDeleteTask(selectedTaskId) {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => task.id !== selectedTaskId),
+      };
+    });
+  }
+
   function handleStartAddProjects() {
     setProjectsState((preProjectsState) => {
       changeButton.current = true;
       return {
         ...preProjectsState,
         selectedProjectId: null,
-      };
-    });
-  }
-  function handleCancelAddProject() {
-    setProjectsState((preProjectsState) => {
-      changeButton.current = false;
-      return {
-        ...preProjectsState,
-        selectedProjectId: undefined,
       };
     });
   }
@@ -50,6 +56,24 @@ function App() {
         ...preProjectsState,
         selectedProjectId: undefined,
         projects: [...preProjectsState.projects, newproject],
+      };
+    });
+  }
+  function handleCancelAddProject() {
+    setProjectsState((preProjectsState) => {
+      changeButton.current = false;
+      return {
+        ...preProjectsState,
+        selectedProjectId: undefined,
+      };
+    });
+  }
+  function handleSelectProjects(id) {
+    setProjectsState((prevState) => {
+      changeButton.current = false;
+      return {
+        ...prevState,
+        selectedProjectId: id,
       };
     });
   }
@@ -74,11 +98,17 @@ function App() {
   const selectedProject = projectsState.projects.find(
     (project) => project.id === projectsState.selectedProjectId
   );
+  let selectedTalks = projectsState.tasks.filter(
+    (task) => task.projectID === projectsState.selectedProjectId
+  );
   let content = (
     <SelectedProject
       project={selectedProject}
       onDelete={handleDeleteProject}
       onExit={handleExitSelected}
+      onAddTask={handleAddTask}
+      onDeleteTask={handleDeleteTask}
+      tasks={selectedTalks}
     />
   );
   if (projectsState.selectedProjectId === null) {
