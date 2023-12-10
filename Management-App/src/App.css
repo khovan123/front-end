@@ -355,6 +355,7 @@ dialog.section-dialog::backdrop {
 }
 .section-task ul li {
   display: flex;
+  align-items: center;
   gap: 1.2rem;
 }
 .section-task ul li span {
@@ -364,6 +365,9 @@ dialog.section-dialog::backdrop {
   background-color: #fff;
   border-radius: 5px;
   width: 50%;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 }
 .newtask {
   display: flex;
