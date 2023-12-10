@@ -10,10 +10,18 @@ export default function AddProjects({ onAdd, onCancel }) {
     const enteredTitle = refTitle.current.value;
     const enteredDescription = refDescription.current.value;
     const enteredDate = refDate.current.value;
+    // const checkYear = new Date(refDate.current.value).getFullYear();
+    // const checkMonth = new Date(refDate.current.value).getMonth();
+    // const checkDate = new Date(refDate.current.value).getDate();
+    const currentTime = new Date();
     if (
       enteredTitle.trim() === "" ||
       enteredDescription.trim() === "" ||
-      enteredDate.trim() === ""
+      enteredDate.trim() === "" ||
+      new Date(refDate.current.value).getFullYear() >
+        currentTime.getFullYear() ||
+      new Date(refDate.current.value).getMonth() > currentTime.getMonth() ||
+      new Date(refDate.current.value).getDate() > currentTime.getDate()
     ) {
       dialog.current.open();
       return;
