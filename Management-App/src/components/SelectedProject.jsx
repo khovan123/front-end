@@ -16,7 +16,7 @@ export default function SelectedProject({
     <section className="section-selectedProject">
       <div className="selectedProject">
         <header>
-          <h2>Title: {project.title}</h2>
+          <h2>{project.title}</h2>
           <div className="selectedProject-btn">
             <button onClick={onDelete} className="btn-delete">
               <i className="fa-solid fa-trash"></i>
@@ -30,8 +30,8 @@ export default function SelectedProject({
           <p className="selectedProject-date">{formattedDate}</p>
           <p className="selectedProject-description">{project.description}</p>
         </div>
-        <Task tasks={tasks} onAdd={onAddTask} onDeleteTask={onDeleteTask} />
       </div>
+      <Task tasks={tasks} onAdd={onAddTask} onDeleteTask={onDeleteTask} />
     </section>
   );
 }

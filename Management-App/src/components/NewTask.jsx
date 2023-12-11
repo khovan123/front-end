@@ -12,9 +12,9 @@ export default function NewTask({ onAdd }) {
     setSelectedTask("");
   }
   return (
-    <p>
+    <p className="newtask">
       <input onChange={handleChange} type="text" value={selectedTask} />
-      <button onClick={handleClick}>Add task</button>
+      <button onClick={handleClick}>Add</button>
     </p>
   );
 }
