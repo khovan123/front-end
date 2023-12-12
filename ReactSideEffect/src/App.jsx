@@ -52,7 +52,6 @@ function App() {
         "selectedPlaces",
         JSON.stringify([id, ...storedIds])
       );
-      console.log(storedIds);
     }
   }
   const handleRemovePlace = useCallback(function handleRemovePlace() {
