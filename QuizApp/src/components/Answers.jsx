@@ -1,28 +1,22 @@
-import QUESTIONS from "../questions";
 export default function Answers({
   answers,
   onselectedAnswer,
   answerState,
   selectedAnswer,
-  questionsAnswers,
+  answerResult,
 }) {
-  // if (answerState === "correct") {
-  //   classes = classes + "correct";
-  // } else if (answerState === "wrong") {
-  //   classes = classes + "wrong";
-  // }
   return (
     <ul id="answers">
       {answers.map((answer) => {
         let classes = "";
         if (selectedAnswer === answer) {
-          if (answerState === "selected") {
-            classes = answerState;
+          if (answerState === "answered") {
+            classes = "selected";
           }
           if (answerState === "wrong" || answerState === "correct") {
             classes = answerState;
           }
-        } else if (answerState === "notyet" && answer === questionsAnswers[0]) {
+        } else if (answerState === "notyet" && answer === answerResult) {
           classes = "wrong";
         }
         return (
@@ -32,6 +26,7 @@ export default function Answers({
               onClick={() => {
                 onselectedAnswer(answer);
               }}
+              disabled={selectedAnswer !== ""}
             >
               {answer}
             </button>

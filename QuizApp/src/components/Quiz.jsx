@@ -1,69 +1,33 @@
 import { useCallback, useState } from "react";
 import QUESTIONS from "../questions.js";
 import Question from "./Question.jsx";
-import quizcomplete from "../assets/quiz-complete.png";
-const TIMER = +10000;
+import Summary from "./Summary.jsx";
+
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
-  const [answerState, setAnswerState] = useState("");
-  const activeQuestion =
-    answerState === "" ? userAnswers.length : userAnswers.length - 1;
+  const activeQuestion = userAnswers.length;
 
-  const handleSelectAnswer = useCallback(
-    function handleSelectAnswer(selectedAnswer) {
-      if (selectedAnswer === null) {
-        console.log("not yet");
-        setAnswerState("notyet");
-        setUserAnswers((prev) => {
-          return [...prev, selectedAnswer];
-        });
-        setTimeout(() => {
-          setAnswerState("");
-        }, 2000);
-      } else {
-        setAnswerState("selected");
-        setUserAnswers((prev) => {
-          return [...prev, selectedAnswer];
-        });
-        setTimeout(() => {
-          if (selectedAnswer === QUESTIONS[activeQuestion].answers[0]) {
-            setAnswerState("correct");
-          } else {
-            setAnswerState("wrong");
-          }
-          setTimeout(() => {
-            setAnswerState("");
-          }, 2000);
-        }, 1000);
-      }
-    },
-    [activeQuestion]
-  );
+  function handleSelectAnswer(selectedAnswer) {
+    setUserAnswers((prev) => {
+      return [...prev, selectedAnswer];
+    });
+  }
 
   const handleSkipAnswer = useCallback(
     () => handleSelectAnswer(null),
     [handleSelectAnswer]
   );
-
-  if (activeQuestion === QUESTIONS.length) {
-    return (
-      <div id="summary">
-        <img src={quizcomplete} alt="this image is quiz complete" />
-      </div>
-    );
+  if (activeQuestion >= QUESTIONS.length) {
+    return <Summary userAnswers={userAnswers} />;
   }
 
   return (
     <section id="quiz">
       <Question
         key={activeQuestion}
-        timer={TIMER}
+        index={activeQuestion}
         onSkipAnswer={handleSkipAnswer}
         onSelectAnswer={handleSelectAnswer}
-        questionsText={QUESTIONS[activeQuestion].text}
-        questionsAnswers={QUESTIONS[activeQuestion].answers}
-        answerState={answerState}
-        selectedAnswer={userAnswers[activeQuestion]}
       />
     </section>
   );
