@@ -5,7 +5,6 @@ import CartContext from "../store/CartContext.jsx";
 export default function MealItem({ meal }) {
   const cartCtx = useContext(CartContext);
   function handleAddMealtoCart() {
-    console.log("ADD_ITEM");
     cartCtx.addItem(meal);
   }
   return (
