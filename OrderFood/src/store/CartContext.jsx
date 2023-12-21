@@ -3,6 +3,7 @@ const CartContext = createContext({
   items: [],
   addItem: (item) => {},
   removeItem: (id) => {},
+  clearCart:()=>{},
 });
 
 function cartReducer(state, action) {
@@ -47,6 +48,13 @@ function cartReducer(state, action) {
       items: updateItems,
     };
   }
+
+  if(action.type==='CLEAR_CART'){
+    return({
+      ...state,
+      items:[]
+    })
+  }
 }
 export function CartContextProvider({ children }) {
   const [cart, dispactchCartAction] = useReducer(cartReducer, { items: [] });
@@ -63,12 +71,18 @@ export function CartContextProvider({ children }) {
       id: id,
     });
   }
+  function clearCart(){
+    dispactchCartAction({
+      type:"CLEAR_CART"
+    })
+  }
   const cartContext = {
     items: cart.items,
     addItem,
     removeItem,
+    clearCart,
   };
-  console.log(cartContext.items);
+  
   return (
     <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>
   );
