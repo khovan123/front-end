@@ -1,0 +1,89 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+.galary-title {
+  margin-top: 4.4rem;
+}
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  /* margin-top: 6.4rem; */
+  /* background-color: brown; */
+  /* gap: 12rem; */
+  margin: 3.2rem 12rem 0 12rem;
+}
+.box-images {
+  /* margin: 0 auto; */
+  width: 100rem;
+  /* background-color: aquamarine;   */
+}
+.image {
+  display: block;
+  max-height: 50rem;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 2.4rem;
+}
+
+/* button {
+  margin: 1.2rem 1.2rem 1.2rem 0;
+}
+button:last-child {
+  margin-right: 0;
+}
+input {
+  margin: 1.2rem 1.2rem 1.2rem 0;
+} */
+.galary-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3rem;
+}
+
+.galary-sidebar {
+  /* background-color: antiquewhite; */
+  /* overflow-y: scroll; */
+}
+.galary-images {
+  height: 45rem;
+}
+.scrollbar {
+  height: 45rem;
+  overflow-y: scroll;
+  position: relative;
+}
+.galary-sidebar img {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+.galary-sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: flex-start;
+  /* overflow-y: scroll; */
+}
+.galary-sidebar li {
+  display: block;
+}
+nav {
+  margin-top: 6.4rem;
+}
+nav .button {
+  display: flex;
+  gap: 1.2rem;
+  /* justify-content: center; */
+  margin-left: 12rem;
+}
+.button button {
+  display: block;
+}
