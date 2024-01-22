@@ -2,11 +2,15 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
 
-export async function fetchEvents({ signal, searchTerm }) {
+export async function fetchEvents({ signal, searchTerm, max }) {
   console.log(searchTerm);
   let url = "http://localhost:3000/events";
 
-  if (searchTerm) {
+  if (max && searchTerm) {
+    url += "?search=" + searchTerm + "&max=" + max;
+  } else if (max) {
+    url += "?max=" + max;
+  } else if (searchTerm) {
     url += "?search=" + searchTerm;
   }
 

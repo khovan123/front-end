@@ -10,45 +10,64 @@ export default function EditEvent() {
   const navigate = useNavigate();
   const param = useParams();
   const id = param.id;
-  const { data, isError, error, isLoading } = useQuery({
-    queryKey: ["event-detail"],
+  const { data, isError, error, isFetching } = useQuery({
+    queryKey: ["events", id],
     queryFn: ({ signal }) => fetchEvent({ id, signal }),
   });
-  const { mutate, isPending } = useMutation({
+  const { mutate, isFetching: isFetchingUdt } = useMutation({
     mutationFn: updateEvent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["event-detail"] });
-      navigate("../");
+    onMutate: async (data) => {
+      const newData = data.event;
+      await queryClient.cancelQueries({ queryKey: ["events", id] });
+      const previousData = queryClient.getQueryData(["events", id]);
+      queryClient.setQueryData(["events", id], newData);
+      return { previousData };
     },
+    onError: (error, data, context) => {
+      queryClient.setQueryData(["events", id], context.previousData.event);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["events", id] });
+    },
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: ["events"] });
+    //   navigate("../");
+    // },
   });
   function handleSubmit(formData) {
     mutate({ id: id, event: formData });
+    navigate("../");
   }
 
   function handleClose() {
     navigate("../");
   }
-
-  return (
-    <Modal onClose={handleClose}>
-      {isPending && <p>Submitting...</p>}
-      {isError && (
+  let content;
+  if (isFetching) {
+    content = <LoadingIndicator />;
+  }
+  if (isError) {
+    content = (
+      <>
         <ErrorBlock
-          title={"Failed to fetch data."}
-          message={error.info?.message || "Please try again later!"}
+          title={"Failed to load event"}
+          message={error.info?.message || "Failed to load event"}
         />
-      )}
-      {isLoading && <LoadingIndicator />}
-      {!isLoading && (
-        <EventForm inputData={data} onSubmit={handleSubmit}>
-          <Link to="../" className="button-text">
-            Cancel
-          </Link>
-          <button type="submit" className="button">
-            Update
-          </button>
-        </EventForm>
-      )}
-    </Modal>
-  );
+        <Link to={"/events"} className="button" />;
+      </>
+    );
+  }
+  if (data) {
+    content = (
+      <EventForm inputData={data} onSubmit={handleSubmit}>
+        <Link to="../" className="button-text">
+          Cancel
+        </Link>
+        <button type="submit" className="button">
+          {isFetchingUdt ? "Updating..." : "Update"}
+        </button>
+      </EventForm>
+    );
+  }
+  return <Modal onClose={handleClose}>{content}</Modal>;
 }
